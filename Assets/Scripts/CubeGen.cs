@@ -11,9 +11,7 @@ public class CubeGen : MonoBehaviour
         Mesh mesh = filter.mesh;
         mesh.Clear();
 
-        int length = 1;
-        int width = 1;
-        int height = 1;
+        int cubeSize = 1;
 
         #region Vertices
 		int numberOfVerticesPerCube = 8;
@@ -21,18 +19,15 @@ public class CubeGen : MonoBehaviour
 
 		for (int i = 0; i < numberOfCubes; i++)
 		{
-			int hozMod = i - (numberOfCubes * (i / numberOfCubes));
-			int vertMod = (i / numberOfCubes) * length;
+			var p0 = new Vector3(-cubeSize * .5f, -cubeSize * .5f, cubeSize * .5f + i);
+			var p1 = new Vector3(cubeSize * .5f, -cubeSize * .5f, cubeSize * .5f + i);
+			var p2 = new Vector3(cubeSize * .5f, -cubeSize * .5f, -cubeSize * .5f + i);
+			var p3 = new Vector3(-cubeSize * .5f, -cubeSize * .5f, -cubeSize * .5f + i);
 
-			var p0 = new Vector3(-length * .5f + vertMod, -width * .5f, height * .5f + hozMod);
-			var p1 = new Vector3(length * .5f + vertMod, -width * .5f, height * .5f + hozMod);
-			var p2 = new Vector3(length * .5f + vertMod, -width * .5f, -height * .5f + hozMod);
-			var p3 = new Vector3(-length * .5f + vertMod, -width * .5f, -height * .5f + hozMod);
-
-			var p4 = new Vector3(-length * .5f + vertMod, width * .5f, height * .5f + hozMod);
-			var p5 = new Vector3(length * .5f + vertMod, width * .5f, height * .5f + hozMod);
-			var p6 = new Vector3(length * .5f + vertMod, width * .5f, -height * .5f + hozMod);
-			var p7 = new Vector3(-length * .5f + vertMod, width * .5f, -height * .5f + hozMod);
+			var p4 = new Vector3(-cubeSize * .5f, cubeSize * .5f, cubeSize * .5f + i);
+			var p5 = new Vector3(cubeSize * .5f, cubeSize * .5f, cubeSize * .5f + i);
+			var p6 = new Vector3(cubeSize * .5f, cubeSize * .5f, -cubeSize * .5f + i);
+			var p7 = new Vector3(-cubeSize * .5f, cubeSize * .5f, -cubeSize * .5f + i);
 
 			vertices[(i * numberOfVerticesPerCube) + 0] = p0;
 			vertices[(i * numberOfVerticesPerCube) + 1] = p1;
@@ -93,11 +88,9 @@ public class CubeGen : MonoBehaviour
         #region Colors
 		var colors = new Color32[vertices.Length];
 
-		var colorChunk = colors.Length / numberOfCubes;
-
 		for (int i = 0; i < numberOfCubes; i++)
 		{
-			for (int j = 0; j < colorChunk; j++)
+			for (int j = 0; j < numberOfVerticesPerCube; j++)
 			{
 				int colorNumber;
 				if (i % 2 == 0)
@@ -109,7 +102,7 @@ public class CubeGen : MonoBehaviour
                 	colorNumber = CubeManager.Instance._originalBytes[((i + (rowNumber * numberOfCubes)) / 2)] & 0x0F;
 				}
 
-				colors[(i * colorChunk) + j] = CubeManager.Instance.intToColorMap[colorNumber];
+				colors[(i * numberOfVerticesPerCube) + j] = CubeManager.Instance.intToColorMap[colorNumber];
 			}
 		}
         #endregion

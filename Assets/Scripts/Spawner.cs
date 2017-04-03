@@ -5,7 +5,6 @@ public class Spawner : MonoBehaviour
 {
 	public static Spawner Instance;
 
-	//public byte[][] pixelArrays;
     public GameObject prefab;
     public int height = 10;
 
@@ -14,7 +13,6 @@ public class Spawner : MonoBehaviour
 		Instance = this;
 	}
 
-    // Use this for initialization
     public IEnumerator StartSpawning()
     {
         for (int i = 0; i < height; i++)

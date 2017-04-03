@@ -44,62 +44,32 @@ public class CubeManager : MonoBehaviour
 
     IEnumerator GetBitmapFromReddit()
     {
-        using (UnityWebRequest www2 = UnityWebRequest.Get(_url))
+        using (UnityWebRequest www = UnityWebRequest.Get(_url))
         {
-            yield return www2.Send();
+            yield return www.Send();
 
-            if (www2.isError)
+            byte[] myArr;
+
+            if (www.isError)
             {
-                Debug.Log("Error: " + www2.error);
-                _originalBytes = www2.downloadHandler.data;
+                Debug.Log("Error: " + www.error);
+                myArr = www.downloadHandler.data;
             }
             else
             {
-                Debug.Log("Data length: " + www2.downloadHandler.data.Length);
+                Debug.Log("Data length: " + www.downloadHandler.data.Length);
 
-                _originalBytes = www2.downloadHandler.data;
-
-                PlaceStartingCubes();
+                myArr = www.downloadHandler.data;
             }
+
+            _originalBytes = new byte[myArr.Length - 4];
+
+            for (int i = 0; i < _originalBytes.Length; i++)
+            {
+                _originalBytes[i] = myArr[i + 4];
+            }
+
+            Spawner.Instance.StartCoroutine(Spawner.Instance.StartSpawning());
         }
-    }
-
-    void PlaceStartingCubes()
-    {
-        //var i = 4;
-
-        // for (var y = 0; y < canvasWidth; y++)
-        // {
-        //     for (var x = 0; x < canvasWidth / 2; x++)
-        //     {
-        //         //var int1 = _originalBytes[i] >> 4;
-        //         //var int2 = _originalBytes[i] & 0x0F;
-
-        //         //var go1 = GameObject.Instantiate(CubePrefab, new Vector3(x * 2, 0, -y), Quaternion.identity) as GameObject;
-        //         //go1.GetComponent<Renderer>().material.color = intToColorMap[int1];
-
-        //         //var go2 = GameObject.Instantiate(CubePrefab, new Vector3(x * 2 + 1, 0, -y), Quaternion.identity) as GameObject;
-        //         //go2.GetComponent<Renderer>().material.color = intToColorMap[int2];
-
-        //         i++;
-        //     }
-        //     //i += ((maxCanvasWidth / 2) - (canvasWidth / 2));
-        //     //yield return null;
-        // }
-
-        // for (int x = 0; x < canvasWidth; x++)
-        // {
-        //     for (int y = 0; y < canvasWidth; y++)
-        //     {
-        //         Spawner.Instance.pixelArrays = new byte[canvasWidth][];
-        //         for (int i = 0; i < canvasWidth; i++)
-        //         {
-        //             Spawner.Instance.pixelArrays[i] = new byte[canvasWidth];
-        //         }
-        //         Spawner.Instance.pixelArrays[x][y] = _originalBytes[(x * canvasWidth) + y];
-        //     }
-        // }
-
-        Spawner.Instance.StartCoroutine(Spawner.Instance.StartSpawning());
     }
 }
