@@ -1,0 +1,3 @@
+[ ] button to snap to orthognal view or other views
+[ ] spawn changed pixels as cubes that float down ontop of the previous cube to form towers
+[ ] let users login and place cubes

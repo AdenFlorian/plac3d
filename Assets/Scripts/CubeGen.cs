@@ -92,7 +92,7 @@ public class CubeGen : MonoBehaviour
 		{
 			for (int j = 0; j < numberOfVerticesPerCube; j++)
 			{
-				int colorNumber = CubeManager.Instance.PlaceBitmap.GetByte(i, rowNumber);
+				int colorNumber = Master.Instance.PlaceBitmap.GetByte(i, rowNumber);
 
 				colors[(i * numberOfVerticesPerCube) + j] = RedditColors.intToColorMap[colorNumber];
 			}

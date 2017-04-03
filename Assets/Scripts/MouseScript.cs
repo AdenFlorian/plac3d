@@ -18,8 +18,8 @@ public class MouseScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        radius = CubeManager.Instance.canvasWidth;
-		centerOfFocus = new Vector3(CubeManager.Instance.canvasWidth / 2, 0, CubeManager.Instance.canvasWidth / 2);
+        radius = Master.Instance.canvasWidth;
+		centerOfFocus = new Vector3(Master.Instance.canvasWidth / 2, 0, Master.Instance.canvasWidth / 2);
     }
 
     // Update is called once per frame
