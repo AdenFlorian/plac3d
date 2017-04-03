@@ -1,0 +1,11 @@
+started at about 1.2GB for mesh data
+
+removied uv's and normals
+
+changed colors to color32's
+
+505MB with 12 tris per cube
+
+505MB with 10 tris per cube
+
+261MB after optimizing verices list
