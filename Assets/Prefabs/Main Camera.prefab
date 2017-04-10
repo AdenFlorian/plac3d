@@ -98,14 +98,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013040804344}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6525cbaf8c8d0c547b7d8a6c1a34d5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MouseYSpeed: 0.1
   MouseXSpeed: 0.1
-  ScrollSpeed: 25
+  ScrollSpeed: 110
   HorizontalSpeed: 100
   VerticalSpeed: 100
 --- !u!124 &124000013971289752

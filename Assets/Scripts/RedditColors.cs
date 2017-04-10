@@ -23,21 +23,3 @@ public static class RedditColors
         {15, new Color32(130, 0, 128, 255)}     // purple
     };
 }
-
-public struct RPlaceBitmap
-{
-	const int WIDTH = 1000;
-	const int HEIGHT = 1000;
-
-	byte[] _bytes;
-
-	public RPlaceBitmap(byte[] bytes)
-	{
-		_bytes = bytes;
-	}
-
-	public byte GetByte(int x, int y)
-	{
-		return _bytes[x + (y * WIDTH)];
-	}
-}
